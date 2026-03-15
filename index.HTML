@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación Darwin</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: black; color: white; font-family: 'Arial', sans-serif; overflow: hidden; }
+
+        /* --- CANVAS DE FONDO --- */
+        #espacio-fondo { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+
+        /* --- PÁGINA 1: ULTRA CUTRE --- */
+        #pagina1 { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; background-color: blue; position: relative; z-index: 100; }
+        .comic-sans { font-family: "Comic Sans MS", cursive; font-size: 2.5rem; color: #00ff00; text-align: center; }
+        .boton-cutre { padding: 20px; background: yellow; color: red; border: 5px solid lime; cursor: pointer; font-weight: bold; font-size: 1.5rem; animation: parpadeo 0.4s infinite; }
+        @keyframes parpadeo { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
+
+        /* --- PÁGINA 2: INTRO STAR WARS --- */
+        #pagina2 { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; background: #000; }
+        #star-wars-titulo { position: absolute; width: 100%; text-align: center; font-size: clamp(3rem, 12vw, 9rem); color: #feda4a; top: 35%; opacity: 0; z-index: 10; }
+        #contenedor-crawl { position: absolute; width: 85%; height: 100%; bottom: 0; left: 7.5%; font-size: clamp(1.8rem, 6vw, 3.8rem); color: #feda4a; text-align: justify; transform: perspective(300px) rotateX(25deg); transform-origin: 50% 100%; }
+        #intro-texto { position: absolute; top: 100%; width: 100%; display: none; animation: crawl 75s linear forwards; }
+        @keyframes crawl { 0% { top: 100%; } 100% { top: -500%; } }
+        @keyframes zoomOut { 0% { opacity: 1; transform: scale(3); } 100% { opacity: 0; transform: scale(0); } }
+
+        /* --- PÁGINA DE INSULTO --- */
+        #pagina-insulto { display: none; flex-direction: column; justify-content: center; align-items: center; height: 100vh; z-index: 200; position: relative; background: rgba(0,0,0,0.8); }
+        .texto-insulto { font-size: clamp(2.5rem, 12vw, 8rem); font-weight: bold; text-align: center; text-transform: uppercase; line-height: 1; margin-bottom: 30px; }
+
+        /* --- CONTENIDO FINAL ROJO --- */
+        #contenido-final { display: none; text-align: center; padding: 20px; overflow-y: auto; height: 100vh; position: relative; }
+        .seccion { display: none; max-width: 500px; margin: 20px auto; padding: 20px; border: 1px solid #333; border-radius: 15px; background: rgba(17, 17, 17, 0.85); box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(5px); }
+        
+        img { width: 100%; max-width: 500px; border-radius: 12px; border: 2px solid #dc3545; margin-bottom: 20px; }
+        .texto-real { font-size: 0.9rem; color: #888; font-style: italic; display: block; margin-top: -15px; margin-bottom: 20px; padding: 0 10px; }
+
+        button { padding: 15px 30px; margin: 10px; border-radius: 50px; border: none; font-weight: bold; cursor: pointer; font-size: 1rem; }
+        .btn-red { background: #dc3545; color: white; }
+        .btn-dark { background: #444; color: #aaa; font-size: 0.8rem; border: 1px solid #666; }
+
+        .confirmacion-final { font-size: 1.3rem; color: white; background: #28a745; padding: 15px; border-radius: 10px; margin-top: 20px; display: none; }
+        #transicion-circulo { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 99; clip-path: circle(150% at 50% 50%); transition: clip-path 1.2s ease-in-out; }
+    </style>
+</head>
+<body>
+
+    <canvas id="espacio-fondo"></canvas>
+
+    <audio id="musicaStarWars" preload="auto">
+        <source src="https://res.cloudinary.com/dskqqcfcz/video/upload/v1773547700/Star_Wars_Intro_HD_1080p_ckwuqz.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="pagina1">
+        <p class="comic-sans">Estas invitado a mi disertacion</p>
+        <button class="boton-cutre" onclick="iniciarTodo()">CLIC AQUI PARA CNTINUAR</button>
+    </div>
+
+    <div id="pagina2">
+        <div id="star-wars-titulo">PORFIN ME VOY A GRADUAR</div>
+        <div id="contenedor-crawl">
+            <div id="intro-texto">
+                <p>POR FIIIIIIN PTM.</p>
+                <p>Es un periodo de caos en la galaxia. Darwin Sotomayor ha sobrevivido a arquitectura sin volverse loco, porque ya lo estoy, kajshdkajshdkjas soy bien chistoso.</p>
+                <p>Después de años de sufrimiento, maquetas, planos, lloradas y noches sin dormir y profesores hijos de puta, Jimmy hijo de puta ojala se muera y sufra cuando lo haga, verga, pero así que le corten los huevos y lo obliguen a comérselos y luego lo torturen y lo maten, bueno ya en que estaba?</p>
+                <p>Ahora, contra todo pronóstico, se prepara para su disertación final. El mundo está a punto de ganar un desempleado mas con titulo de arquitecto, ojala y algún amigo me ofrezca lavar dinero y nuca tener que ejercer.</p>
+                <p>Prepárense para presenciar el fin de una era, na mentira la misma verga va a ser pero con un papel que diga arquitecto, bueno, para que quede con la música de fondo lean esto con voz de algún Jedí.</p>
+                <p>¡Que la fuerza los acompañe!</p>
+                <br>
+                <p>Bueno ya no se que poner, esperense a que se acabe esta cancion, temazo.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="pagina-insulto">
+        <div class="texto-insulto">Ya ya come verga tienes que ir mmvrg</div>
+        <button class="btn-red" onclick="mostrarSeccionDesdeInsulto('dinamica')">Siguiente</button>
+    </div>
+
+    <div id="transicion-circulo"></div>
+
+    <div id="contenido-final">
+        <div id="inicio-invitacion">
+            <img src="https://i.postimg.cc/855Zcfbc/Whats-App-Image-2026-03-14-at-11-02-11-PM-(1).jpg" alt="Portada">
+            <span class="texto-real">Esta foto es 100% real no ia, nomás que mis dos amigos el Jefe maestro y el t rex no van poder ir ese día :(</span>
+            <h2 style="color:#dc3545;">¡Ya era hora!</h2>
+            <div style="text-align: left; max-width: 400px; margin: 0 auto 20px; line-height: 1.6;">
+                <p>🗓️ <b>Fecha:</b> Miércoles 18 de Marzo</p>
+                <p>⏰ <b>Hora:</b> 8:30 a.m.</p>
+                <p>📍 <b>Lugar:</b> UTPL, Edificio D (creo). Frente a la biblioteca. Si no sabes donde es, pregunta a los guardias.</p>
+            </div>
+            <p>¿Quién eres?</p>
+            <button class="btn-red" onclick="mostrarSeccion('amigos')">Amigo</button>
+            <button class="btn-red" onclick="mostrarSeccion('novia-login')">Ivvis ❤️</button>
+            <br>
+            <button class="btn-dark" onclick="reiniciarTodo()">REINICIAR TODO (VER INTRO)</button>
+        </div>
+
+        <div id="seccion-amigos" class="seccion">
+            <p>Gracias por estar en todo este camino. Eres un gran amigo/a y quiero que me veas por fin salir de este verga de carrera.</p>
+            <button class="btn-red" onclick="mostrarSeccion('dinamica')">¡Ahí estaré!</button>
+            <button class="btn-red" style="background:#444" onclick="irAInsulto()">No puedo</button>
+            <br><button class="btn-dark" onclick="volverAInicio()">Atrás</button>
+        </div>
+
+        <div id="seccion-dinamica" class="seccion">
+            <h3 style="color:#dc3545;">⚠️ DINÁMICA DE FRUTAS ⚠️</h3>
+            <p>Aviso: Habrá una dinámica ese día (no es obligatoria). No quiero flores, si pensabas llevar flores mejor lleva frutas en cualquier presentación (individual o en grupo).</p>
+            <p>La fruta más creativa, chistosa, la más grande o en presentación tipo ramo gana un <b>PREMIO SORPRESA</b>.</p>
+            <button class="btn-red" id="btn-part" onclick="finalizar('¡Te espero con la fruta más loca!')">Me uno a la dinámica</button>
+            <button class="btn-red" id="btn-no-part" style="background:#444" onclick="finalizar('No hay problema con tu presencia me sirve.')">No gracias</button>
+            <div id="mensaje-final-integrado" class="confirmacion-final">
+                Confirmado. Miércoles 18, 8:30 AM. ¡Sé puntual!
+                <p id="subtexto-final" style="font-size: 1rem; margin-top: 10px;"></p>
+            </div>
+            <br><button class="btn-dark" onclick="resetDinamica()">Atrás</button>
+        </div>
+
+        <div id="seccion-novia-login" class="seccion" style="border-color:#dc3545;">
+            <p style="color:#dc3545;">Código secreto:</p>
+            <input type="password" id="pass" style="padding:10px; border-radius:10px; border:none; text-align:center; width: 80%; background:#222; color:white;">
+            <br><br><button class="btn-red" onclick="validaNovia()">Entrar</button>
+            <br><button class="btn-dark" onclick="volverAInicio()">Atrás</button>
+        </div>
+
+        <div id="seccion-novia-1" class="seccion" style="border-color:#dc3545;">
+            <img src="https://i.postimg.cc/3RRtN0Z4/Whats-App-Image-2026-03-14-at-10-37-32-PM-(1).jpg" alt="Amor">
+            <p style="text-align:justify; color:#dc3545;">Mi amor, aunque la distancia nos separe hoy, estás en cada meta que alcanzo. Eres lo mejor de estos años, y como ya te había dicho este no es un logro, quiero una vida contigo y ese va a ser nuestro logro y quiero celebrar eso contigo.</p>
+            <button class="btn-red" onclick="mostrarSeccion('novia-2')">Siguiente</button>
+            <br><button class="btn-dark" onclick="volverAInicio()">Atrás</button>
+        </div>
+
+        <div id="seccion-novia-2" class="seccion" style="border-color:#dc3545;">
+            <img src="https://i.postimg.cc/0QQVjKCz/Whats-App-Image-2026-03-14-at-10-37-32-PM-(2).jpg" alt="Juntos">
+            <p style="color:#dc3545; border: 1px dashed #dc3545; padding: 10px; margin-bottom: 15px;">
+                Por cierto, va haber una dinámica de frutas y tienes que obligar a los chicos a que participen por favor, no quiero que nadie llegue sin una fruta.
+            </p>
+            <p style="color:#dc3545; font-weight:bold;">
+                Ya falta poco para vernos y estar pegados como chicle. ¡Te extraño muchísimo! Ya falta muy poco para que vuelvas para la graduación juntos. ¡Te amo mucho!
+            </p>
+            <button class="btn-red" onclick="mostrarSeccion('novia-3')">Siguiente</button>
+            <br><button class="btn-dark" onclick="mostrarSeccion('novia-1')">Atrás</button>
+        </div>
+
+        <div id="seccion-novia-3" class="seccion" style="border-color:#dc3545;">
+            <img src="https://i.postimg.cc/Y99d0Lxh/Whats-App-Image-2026-03-14-at-10-37-32-PM-(3).jpg" alt="Final">
+            <p style="color:#dc3545; margin-bottom: 20px;">
+                Al dar clic en ese botón te llevará al WhatsApp de David para que no se olvide de tomar fotos o estar allí para que haga llamada, él está encargado de eso jajajaja.
+            </p>
+            <button class="btn-red" onclick="window.location.href='https://wa.me/593959112795?text=Oe%20mmvgr%20no%20te%20olvidaras%20de%20tomar%20fotos%20de%20mi%20novio%20el%20dia%20de%20la%20disertacion%20y%20si%20puedo%20hacerte%20video%20llamada%20a%20esa%20hora%20ese%20dia%20contestaras%2C%20seras%20puntual%20porfavor'">CLIC AQUÍ</button>
+            <br><button class="btn-dark" onclick="mostrarSeccion('novia-2')">Atrás</button>
+        </div>
+    </div>
+
+    <script>
+        // --- LÓGICA DEL FONDO GALÁCTICO ---
+        const canvas = document.getElementById('espacio-fondo');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        let comets = [];
+        let modoAmor = false;
+        const frasesAmor = ["Te amo", "Eres el amor de mi vida", "Te extraño"];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            stars = [];
+            for(let i=0; i<200; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2,
+                    speed: Math.random() * 0.5,
+                    opacity: Math.random(),
+                    isText: false,
+                    text: ""
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Nebulosas difuminadas
+            let grad = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, canvas.width);
+            grad.addColorStop(0, '#0a0a1a');
+            grad.addColorStop(1, '#000');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0,0, canvas.width, canvas.height);
+
+            stars.forEach(s => {
+                ctx.fillStyle = `rgba(255, 255, 255, ${s.opacity})`;
+                if (modoAmor && Math.random() < 0.01 && !s.isText) {
+                    s.isText = true;
+                    s.text = frasesAmor[Math.floor(Math.random() * frasesAmor.length)];
+                    s.textOpacity = 0;
+                }
+
+                if (s.isText) {
+                    ctx.font = "12px Arial";
+                    ctx.fillText(s.text, s.x, s.y);
+                    s.textOpacity += 0.01;
+                    if(s.textOpacity > 1) { s.isText = false; }
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
+                    ctx.fill();
+                }
+
+                s.y += s.speed;
+                if(s.y > canvas.height) s.y = 0;
+            });
+
+            if(Math.random() < 0.02) {
+                comets.push({x: Math.random()*canvas.width, y: -10, speedX: (Math.random()-0.5)*10, speedY: Math.random()*15, length: Math.random()*50});
+            }
+
+            comets.forEach((c, i) => {
+                ctx.strokeStyle = "rgba(255,255,255,0.3)";
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(c.x, c.y);
+                ctx.lineTo(c.x + c.speedX, c.y + c.speedY + c.length);
+                ctx.stroke();
+                c.x += c.speedX;
+                c.y += c.speedY;
+                if(c.y > canvas.height) comets.splice(i, 1);
+            });
+
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        draw();
+
+        // --- LÓGICA DE NAVEGACIÓN ---
+        const audio = document.getElementById('musicaStarWars');
+        function iniciarTodo() {
+            audio.currentTime = 0; audio.play();
+            document.getElementById('pagina1').style.display = 'none';
+            document.getElementById('pagina2').style.display = 'block';
+            setTimeout(() => {
+                const titulo = document.getElementById('star-wars-titulo');
+                titulo.style.animation = "zoomOut 7s ease-out forwards";
+                setTimeout(() => { document.getElementById('intro-texto').style.display = 'block'; }, 2000);
+            }, 3000); 
+            window.introTimer = setTimeout(() => { irAFinal(); }, 71000); 
+        }
+
+        function irAFinal() {
+            const trans = document.getElementById('transicion-circulo');
+            trans.style.display = 'block';
+            setTimeout(() => { trans.style.clipPath = 'circle(0% at 50% 50%)'; }, 50);
+            setTimeout(() => {
+                audio.pause(); document.getElementById('pagina2').style.display = 'none';
+                document.getElementById('contenido-final').style.display = 'block';
+                trans.style.display = 'none'; volverAInicio();
+            }, 1300);
+        }
+
+        function finalizar(subtexto) {
+            document.getElementById('btn-part').style.display = 'none';
+            document.getElementById('btn-no-part').style.display = 'none';
+            document.getElementById('mensaje-final-integrado').style.display = 'block';
+            document.getElementById('subtexto-final').innerText = subtexto;
+        }
+
+        function resetDinamica() {
+            document.getElementById('btn-part').style.display = 'inline-block';
+            document.getElementById('btn-no-part').style.display = 'inline-block';
+            document.getElementById('mensaje-final-integrado').style.display = 'none';
+            mostrarSeccion('amigos');
+        }
+
+        function reiniciarTodo() {
+            if(window.introTimer) clearTimeout(window.introTimer);
+            audio.pause(); audio.currentTime = 0;
+            modoAmor = false;
+            document.getElementById('intro-texto').style.display = 'none';
+            document.getElementById('star-wars-titulo').style.animation = 'none'; 
+            void document.getElementById('star-wars-titulo').offsetWidth; 
+            document.getElementById('contenido-final').style.display = 'none';
+            document.getElementById('pagina-insulto').style.display = 'none';
+            document.getElementById('pagina1').style.display = 'flex';
+        }
+
+        function mostrarSeccion(id) {
+            document.querySelectorAll('.seccion, #inicio-invitacion').forEach(s => s.style.display = 'none');
+            document.getElementById('seccion-' + id).style.display = 'block';
+        }
+
+        function volverAInicio() {
+            document.querySelectorAll('.seccion').forEach(s => s.style.display = 'none');
+            document.getElementById('inicio-invitacion').style.display = 'block';
+        }
+
+        function irAInsulto() {
+            document.getElementById('contenido-final').style.display = 'none';
+            document.getElementById('pagina-insulto').style.display = 'flex';
+        }
+
+        function mostrarSeccionDesdeInsulto(id) {
+            document.getElementById('pagina-insulto').style.display = 'none';
+            document.getElementById('contenido-final').style.display = 'block';
+            mostrarSeccion(id);
+        }
+
+        function validaNovia() {
+            if(document.getElementById('pass').value.toLowerCase() === 'quevedo') {
+                modoAmor = true;
+                mostrarSeccion('novia-1');
+            } else alert('¡Tú no eres Ivvis!');
+        }
+    </script>
+</body>
+</html>
